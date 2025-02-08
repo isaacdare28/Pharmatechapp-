@@ -3,105 +3,323 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tooth Carving Lecture Slides</title>
+    <title>PharmaTech App</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            background: url('https://images.unsplash.com/photo-1562243061-204550d8a2c9?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
         }
-
-        .slide-container {
-            display: flex;
-            flex-direction: column;
+        header {
+            background: rgba(53, 66, 74, 0.8);
+            padding: 1rem 0;
+            text-align: center;
+            position: relative;
+        }
+        .title-container {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            margin: 20px;
-            padding: 20px;
         }
-
-        .slide {
-            display: none;
-            width: 80%;
-            text-align: center;
+        .title {
+            font-size: 3.5rem;
+            margin: 0;
+            animation: fadeIn 2s ease-in-out infinite alternate, brighten 2s ease-in-out infinite alternate;
         }
-
-        .active {
-            display: block;
-        }
-
-        h1, h2, p {
-            margin: 20px 0;
-        }
-
-        nav {
-            margin-top: 20px;
-        }
-
-        button {
-            background-color: #007BFF;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            margin: 5px;
-            border-radius: 5px;
+        .notification-icon {
+            margin-left: 20px;
+            transform: translateY(10px);
             cursor: pointer;
         }
-
-        button:hover {
-            background-color: #0056b3;
+        .notification-icon img {
+            width: 30px;
+            height: 30px;
+        }
+        .subtitle {
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            color: #dcdcdc;
+            font-style: italic;
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: stream 10s linear infinite;
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes brighten {
+            0% {
+                filter: brightness(70%);
+            }
+            100% {
+                filter: brightness(100%);
+            }
+        }
+        @keyframes stream {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        .menu-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .menu-item {
+            background: rgba(53, 66, 74, 0.8);
+            margin: 10px;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+        .menu-item:hover {
+            background: rgba(75, 92, 104, 0.8);
+        }
+        .menu-item img {
+            width: 50px;
+            height: 50px;
+        }
+        .menu-item h2 {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+        .menu-item a {
+            text-decoration: none;
+            color: white;
+        }
+        .submenu {
+            display: none;
+            margin-top: 10px;
+        }
+        .menu-item:hover .submenu {
+            display: block;
+        }
+        .submenu a {
+            display: block;
+            padding: 5px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .submenu a:hover {
+            background: rgba(75, 92, 104, 0.8);
+        }
+        .section {
+            display: none;
+            padding: 20px;
+            background: rgba(53, 66, 74, 0.9);
+            border-radius: 10px;
+            margin: 20px;
+        }
+        .section h2 {
+            font-size: 2rem;
+        }
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            .menu-item {
+                width: 100%;
+                margin: 10px 0;
+            }
+            .top-bar {
+                flex-direction: column;
+                height: auto;
+                padding: 10px 0;
+            }
+            .subtitle {
+                font-size: 0.8rem;
+                bottom: -20px;
+            }
+        }
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2rem;
+            }
+            .subtitle {
+                font-size: 0.7rem;
+                bottom: -15px;
+            }
+            .top-bar {
+                padding: 5px 0;
+            }
+            .notification-icon img {
+                width: 25px;
+                height: 25px;
+            }
         }
     </style>
 </head>
 <body>
-
-    <div class="slide-container">
-        <div class="slide active" id="slide1">
-            <h1>Tooth Carving: An Introduction</h1>
-            <p>This lecture will guide you through the fundamentals of tooth carving, starting with the basics and moving to detailed carving techniques.</p>
+    <header>
+        <div class="title-container">
+            <h1 class="title">PharmaTech App</h1>
+            <a href="#notifications" class="notification-icon">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/appointment-reminders.png" alt="Notifications">
+            </a>
         </div>
-        
-        <div class="slide" id="slide2">
-            <h2>Understanding Tooth Anatomy</h2>
-            <p>To carve accurately, a clear understanding of tooth anatomy is essential. Let's explore the basic structure of a tooth.</p>
-        </div>
-        
-        <!-- Add more slides up to 30 -->
+        <h2 class="subtitle">Powered by EduHeTech</h2>
+    </header>
 
-        <nav>
-            <button id="prev">Previous</button>
-            <button id="next">Next</button>
-        </nav>
+    <div class="menu-container">
+        <div class="menu-item">
+            <a href="go:S123">
+                <img src="https://img.icons8.com/ios/50/ffffff/overview-pages-3.png" alt="PharmaTech Overview">
+                <h2>PharmaTech Overview</h2>
+            </a>
+        </div>
+        <div class="menu-item">
+            <img src="https://img.icons8.com/ios/50/ffffff/book.png" alt="Learning Resources">
+            <h2>Learning Resources</h2>
+            <div class="submenu">
+                <a href="#section1">Lecture Notes</a>
+                <a href="go:S127">Virtual Class</a>
+                <a href="go:S126">Videos</a>
+                <a href="go:S130">Quizzes</a>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="https://img.icons8.com/ios/50/ffffff/administrative-tools.png" alt="Practice Tools">
+            <h2>Practice Tools</h2>
+            <div class="submenu">
+                <a href="go:S124">Drug Database</a>
+                <a href="go:S125">Calculators</a>
+                <a href="go:S128">Flashcards</a>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="https://img.icons8.com/ios/50/ffffff/conference-call.png" alt="Community">
+            <h2>Community</h2>
+            <div class="submenu">
+                <a href="go:S129">Forum</a>
+                <a href="#section8">Groups</a>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="https://img.icons8.com/ios/50/ffffff/school.png" alt="LMS">
+            <h2>LMS</h2>
+            <div class="submenu">
+                <a href="go:S133">Courses</a>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="https://img.icons8.com/ios/50/ffffff/calendar.png" alt="More">
+            <h2>More</h2>
+            <div class="submenu">
+                <a href="go:S132">Events</a>
+                <a href="go:S131">Resources</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section id="section1" class="section">
+            <h2>Lecture Notes</h2>
+            <p>Organized by topic/category</p>
+            <p>Search function</p>
+            <p>Downloadable PDFs or interactive content</p>
+        </section>
+
+        <section id="section13" class="section">
+            <h2>Virtual Class</h2>
+            <p>Interactive virtual classes</p>
+            <p>Live Q&A sessions</p>
+        </section>
+
+        <section id="section14" class="section">
+            <h2>Videos</h2>
+            <p>Tutorial videos</p>
+            <p>Recorded lectures</p>
+        </section>
+
+        <section id="section2" class="section">
+            <h2>Quizzes</h2>
+            <p>Multiple choice, true/false, and short answer</p>
+            <p>Timed and untimed options</p>
+        </section>
+
+        <section id="section3" class="section">
+            <h2>Drug Database</h2>
+            <p>Searchable by drug name, class, and use</p>
+            <p>Includes pictures and descriptions</p>
+        </section>
+
+        <section id="section4" class="section">
+            <h2>Calculators</h2>
+            <p>Dosage calculators</p>
+            <p>Conversion tools</p>
+        </section>
+
+        <section id="section5" class="section">
+            <h2>Interaction Checkers</h2>
+            <p>Check for drug-drug and drug-food interactions</p>
+        </section>
+
+        <section id="section6" class="section">
+            <h2>Flashcards</h2>
+            <p>Key terms and definitions</p>
+            <p>Study mode and quiz mode</p>
+        </section>
+
+        <section id="section7" class="section">
+            <h2>Forum</h2>
+            <p>Discussion boards for different topics</p>
+            <p>User profiles and reputation systems</p>
+        </section>
+
+        <section id="section8" class="section">
+            <h2>Groups</h2>
+            <p>Study groups and peer-to-peer support</p>
+            <p>Group chats and file sharing</p>
+        </section>
+
+        <section id="section11" class="section">
+            <h2>Events</h2>
+            <p>Upcoming events, webinars, and conferences</p>
+            <p>Reminders and notifications</p>
+        </section>
+
+        <section id="section12" class="section">
+            <h2>Resources</h2>
+            <p>Additional resources, such as books or websites</p>
+            <p>Recommendations from instructors or peers</p>
+        </section>
+
+        <section id="notifications" class="section">
+            <h2>Notifications</h2>
+            <p>Here you can view all your notifications.</p>
+        </section>
     </div>
 
     <script>
-        const slides = document.querySelectorAll('.slide');
-        let currentSlide = 0;
-
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.classList.remove('active');
-                if (i === index) {
-                    slide.classList.add('active');
-                }
-            });
+        // Function to display the notifications section
+        function showNotifications() {
+            var notificationsSection = document.getElementById('notifications');
+            notificationsSection.style.display = 'block';
+            notificationsSection.scrollIntoView({ behavior: 'smooth' });
         }
 
-        document.getElementById('next').addEventListener('click', () => {
-            currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
-        });
-
-        document.getElementById('prev').addEventListener('click', () => {
-            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            showSlide(currentSlide);
-        });
+        // Add event listener to the notification icon
+        document.querySelector('.notification-icon').addEventListener('click', showNotifications);
     </script>
-
 </body>
 </html>
