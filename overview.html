@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaTech App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: url('https://images.unsplash.com/photo-1562243061-204550d8a2c9?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+            background-size: cover;
+        }
+        header {
+            background: rgba(53, 66, 74, 0.8);
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        .title {
+            font-size: 3.5rem;
+            animation: fadeIn 2s ease-in-out infinite alternate, brighten 2s ease-in-out infinite alternate;
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes brighten {
+            0% {
+                filter: brightness(70%);
+            }
+            100% {
+                filter: brightness(100%);
+            }
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        h1, h2 {
+            color: #35424a;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button-container button {
+            padding: 10px 20px;
+            background: #35424a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        .button-container button:hover {
+            background: #575757;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="title">PharmaTech App</h1>
+    </header>
+
+    <div class="container">
+        <section id="section1" class="section active">
+            <h2>Pharmacy Technician Training Programs</h2>
+            <p>Pharmacy technician training programs are designed to prepare students for a career as pharmacy technicians. These programs cover essential topics such as medication dispensing, drug interactions, dosage calculations, and pharmacy law.</p>
+            <ul>
+                <li>Students learn about pharmaceuticals, drug classifications, and the role of pharmacy technicians in healthcare settings.</li>
+                <li>Programs may include both classroom instruction and hands-on training in simulated or real pharmacy environments.</li>
+            </ul>
+        </section>
+
+        <section id="section2" class="section">
+            <h2>Entry Requirements</h2>
+            <ul>
+                <li>Most pharmacy technician programs require a high school diploma or equivalent.</li>
+                <li>Some programs may have additional prerequisites, such as specific science courses or background checks.</li>
+            </ul>
+        </section>
+
+        <section id="section3" class="section">
+            <h2>Course Content</h2>
+            <p>Common topics covered in pharmacy technician courses include:</p>
+            <ul>
+                <li><strong>Pharmacology:</strong> Understanding drug classes, interactions, and side effects.</li>
+                <li><strong>Pharmacy Law and Ethics:</strong> Learning about regulations, patient confidentiality, and professional conduct.</li>
+                <li><strong>Dosage Calculations:</strong> Developing skills in calculating drug dosages and preparing medications.</li>
+                <li><strong>Drug Dispensing and Inventory Management:</strong> Practicing medication dispensing techniques and managing pharmacy inventory.</li>
+                <li><strong>Clinical Skills:</strong> Hands-on training in compounding medications, labeling prescriptions, and using pharmacy software.</li>
+                <li><strong>Communication Skills:</strong> Learning how to interact with patients, pharmacists, and other healthcare professionals.</li>
+            </ul>
+        </section>
+
+        <section id="section4" class="section">
+            <h2>Certification and Licensing</h2>
+            <ul>
+                <li>After completing a pharmacy technician program, students can pursue certification through organizations like the Pharmacy Technician Certification Board (PTCB).</li>
+                <li>Certification is not always required, but it can enhance job prospects and demonstrate competency.</li>
+                <li>Some states also require licensure for pharmacy technicians.</li>
+            </ul>
+        </section>
+
+        <section id="section5" class="section">
+            <h2>Career Opportunities</h2>
+            <ul>
+                <li>Pharmacy technicians work in various settings, including retail pharmacies, hospitals, clinics, and long-term care facilities.</li>
+                <li>They assist pharmacists with prescription processing, medication dispensing, and patient education.</li>
+            </ul>
+        </section>
+
+        <section id="section6" class="section">
+            <h2>Professional Qualifications</h2>
+            <ul>
+                <li>To become a certified pharmacy technician, students can take the Pharmacy Technician Certification Exam (PTCE) offered by the PTCB.</li>
+                <li>Continuing education and recertification are necessary to maintain certification.</li>
+            </ul>
+        </section>
+
+        <div class="button-container">
+            <button id="prevButton">Previous</button>
+            <button id="nextButton">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const sections = document.querySelectorAll('.section');
+        const nextButton = document.getElementById('nextButton');
+        const prevButton = document.getElementById('prevButton');
+        let currentSectionIndex = 0;
+
+        function updateSectionVisibility() {
+            sections.forEach((section, index) => {
+                section.classList.toggle('active', index === currentSectionIndex);
+            });
+        }
+
+        nextButton.addEventListener('click', () => {
+            if (currentSectionIndex < sections.length - 1) {
+                currentSectionIndex++;
+            } else {
+                currentSectionIndex = 0; // Loop back to the first section
+            }
+            updateSectionVisibility();
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (currentSectionIndex > 0) {
+                currentSectionIndex--;
+            } else {
+                currentSectionIndex = sections.length - 1; // Loop back to the last section
+            }
+            updateSectionVisibility();
+        });
+
+        updateSectionVisibility(); // Initial call to set up the visibility
+    </script>
+</body>
+</html>
