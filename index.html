@@ -236,7 +236,7 @@
       <div class="submenu">
         <a href="https://www.drugs.com/drug_information.html">Drug Database</a>
         <a href="https://www.omnicalculator.com/health/dosage">Calculators</a>
-        <a href="https://v0-modern-flashcards-7aomda.vercel.app/">Flashcards</a>
+        <a href="#" id="flashcards-link">Flashcards</a>
       </div>
     </div>
     <div class="menu-item">
@@ -282,6 +282,21 @@
 
     // Add event listener to the notification icon
     document.querySelector('.notification-icon').addEventListener('click', showNotifications);
+
+    // Function to show ad and then redirect to flashcards
+    function showAdAndRedirect() {
+      // Simulate showing an ad (replace with actual ad display logic)
+      alert("Showing an ad...");
+
+      // Redirect to the flashcards page after the ad
+      window.location.href = "https://v0-modern-flashcards-7aomda.vercel.app/";
+    }
+
+    // Add event listener to the flashcards link
+    document.getElementById('flashcards-link').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent the default link behavior
+      showAdAndRedirect();
+    });
   </script>
 </body>
 </html>
