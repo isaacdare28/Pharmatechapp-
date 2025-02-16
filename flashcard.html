@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pharmtech Flashcards with Progress</title>
+    <title>Pharmtech Flashcards</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -98,14 +98,14 @@
         const adURL = 'https://nutchaungong.com/4/7667716';
 
         function startSession() {
-            // Show popunder ad
+            // Trigger popunder ad
             const popunder = window.open(adURL, '_blank');
-            if(popunder) {
+            if (popunder) {
                 popunder.blur();
                 window.focus();
             }
-            
-            // Initialize session
+
+            // Initialize flashcards
             document.querySelector('.introduction').style.display = 'none';
             document.getElementById('flashcardContainer').style.display = 'flex';
             loadCard(currentIndex);
@@ -135,11 +135,9 @@
 
         // Resume functionality
         window.addEventListener('load', () => {
-            if(localStorage.getItem('flashcardIndex')) {
-                if(confirm('Resume previous session?')) {
-                    startSession();
-                    loadCard(localStorage.getItem('flashcardIndex'));
-                }
+            if (localStorage.getItem('flashcardIndex')) {
+                startSession();
+                loadCard(localStorage.getItem('flashcardIndex'));
             }
         });
     </script>
