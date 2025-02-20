@@ -93,13 +93,13 @@
         <h1>Pharmacy Flashcards</h1>
         <p>Select a flashcard to begin:</p>
         <ul class="flashcard-list">
-            <li><a href="#" onclick="startSession('https://www.studystack.com/iflashcardnew-1305538')">Flashcard 1</a></li>
-            <li><a href="#" onclick="startSession('https://www.studystack.com/iflashcardnew-430290')">Flashcard 2</a></li>
-            <li><a href="#" onclick="startSession('https://www.studystack.com/iflashcardnew-6230')">Flashcard 3</a></li>
-            <li><a href="#" onclick="startSession('https://www.studystack.com/iflashcardnew-320263')">Flashcard 4</a></li>
-            <li><a href="#" onclick="startSession('https://www.studystack.com/iflashcardnew-14270')">Flashcard 5</a></li>
-            <li><a href="#" onclick="startSession('https://www.studystack.com/iflashcardnew-664791')">Flashcard 6</a></li>
-            <li><a href="#" onclick="startSession('https://www.studystack.com/iflashcardnew-1732617')">Flashcard 7</a></li>
+            <li><a href="#" onclick="startSession('https://www.studystack.com/iflashcardnew-1305538', 0)">Flashcard 1</a></li>
+            <li><a href="#" onclick="startSession('https://www.studystack.com/iflashcardnew-430290', 1)">Flashcard 2</a></li>
+            <li><a href="#" onclick="startSession('https://www.studystack.com/iflashcardnew-6230', 2)">Flashcard 3</a></li>
+            <li><a href="#" onclick="startSession('https://www.studystack.com/iflashcardnew-320263', 3)">Flashcard 4</a></li>
+            <li><a href="#" onclick="startSession('https://www.studystack.com/iflashcardnew-14270', 4)">Flashcard 5</a></li>
+            <li><a href="#" onclick="startSession('https://www.studystack.com/iflashcardnew-664791', 5)">Flashcard 6</a></li>
+            <li><a href="#" onclick="startSession('https://www.studystack.com/iflashcardnew-1732617', 6)">Flashcard 7</a></li>
         </ul>
     </div>
 
@@ -113,7 +113,11 @@
     <script>
         const adURL = 'https://nutchaungong.com/4/7667716';
 
-        function startSession(flashcardURL) {
+        // Function to start a session
+        function startSession(flashcardURL, index) {
+            // Save the selected flashcard index to localStorage
+            localStorage.setItem('lastFlashcardIndex', index);
+
             // Open popunder ad
             const popunder = window.open(adURL, '_blank');
             if (popunder) {
@@ -127,11 +131,34 @@
             document.getElementById('flashcardFrame').src = flashcardURL;
         }
 
+        // Function to end the session
         function endSession() {
+            localStorage.removeItem('lastFlashcardIndex'); // Clear the stored index
             document.getElementById('flashcardContainer').style.display = 'none';
             document.querySelector('.introduction').style.display = 'block';
             document.getElementById('flashcardFrame').src = ''; // Clear the iframe
         }
+
+        // Check localStorage on page load
+        window.addEventListener('load', () => {
+            const lastFlashcardIndex = localStorage.getItem('lastFlashcardIndex');
+            if (lastFlashcardIndex !== null) {
+                // If a flashcard index is stored, load the corresponding flashcard
+                const flashcardURLs = [
+                    "https://www.studystack.com/iflashcardnew-1305538",
+                    "https://www.studystack.com/iflashcardnew-430290",
+                    "https://www.studystack.com/iflashcardnew-6230",
+                    "https://www.studystack.com/iflashcardnew-320263",
+                    "https://www.studystack.com/iflashcardnew-14270",
+                    "https://www.studystack.com/iflashcardnew-664791",
+                    "https://www.studystack.com/iflashcardnew-1732617"
+                ];
+                const url = flashcardURLs[lastFlashcardIndex];
+                document.querySelector('.introduction').style.display = 'none';
+                document.getElementById('flashcardContainer').style.display = 'flex';
+                document.getElementById('flashcardFrame').src = url;
+            }
+        });
     </script>
 </body>
-            </html>
+</html>
